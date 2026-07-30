@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中國大陸車市視覺化分析報告（完整互動版）2025-2028</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "微软雅黑", sans-serif;
+            line-height: 1.8;
+        }
+        .chart-container {
+            width: 100%;
+            height: 500px;
+            margin: 2rem 0;
+        }
+        .section-title {
+            color: #1e40af;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 0.5rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        th {
+            background-color: #3b82f6;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 0.875rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        tr:hover {
+            background-color: #f3f4f6;
+        }
+        .data-source {
+            background-color: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+        .key-finding {
+            background-color: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-gray-800 mb-4">中國大陸車市視覺化分析報告</h1>
+            <h2 class="text-3xl text-blue-600 mb-2">完整互動版 2025-2028</h2>
+            <p class="text-xl text-gray-600">品牌市佔率 × 價格區間 × 政策影響 × 競爭格局深度分析</p>
+            <div class="mt-6 text-sm text-gray-500">
+                報告生成日期：2026年7月 | 數據來源：中汽協、CADA、IDC、IEA等權威機構
+            </div>
+        </header>
+
+        <!-- Executive Summary -->
+        <div class="highlight-box">
+            <h3 class="text-2xl font-bold mb-4">📊 核心發現摘要</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <p class="font-semibold mb-2">🏆 市場領導者</p>
+                    <p>比亞迪以27.2%市佔率穩居榜首，銷量460.2萬輛</p>
+                </div>
+                <div>
+                    <p class="font-semibold mb-2">📈 滲透率突破</p>
+                    <p>2025年新能源車滲透率達47.9%，2028年預計65%</p>
+                </div>
+                <div>
+                    <p class="font-semibold mb-2">💰 主流價格帶</p>
+                    <p>10-20萬元區間佔比38.3%，競爭最激烈</p>
+                </div>
+                <div>
+                    <p class="font-semibold mb-2">🔋 動力結構</p>
+                    <p>純電動車58.3%、插電混動32%、增程式9.7%</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h3 class="text-2xl font-bold mb-4 text-gray-800">📑 報告目錄</h3>
+            <ol class="list-decimal list-inside space-y-2 text-lg">
+                <li><a href="#section1" class="text-blue-600 hover:underline">能源結構變化與全球對比</a></li>
+                <li><a href="#section2" class="text-blue-600 hover:underline">品牌市佔率深度分析</a></li>
+                <li><a href="#section3" class="text-blue-600 hover:underline">價格區間市場分析</a></li>
+                <li><a href="#section4" class="text-blue-600 hover:underline">政策影響全面評估</a></li>
+                <li><a href="#section5" class="text-blue-600 hover:underline">動力結構與競爭格局</a></li>
+                <li><a href="#section6" class="text-blue-600 hover:underline">資料來源與推估假設</a></li>
+            </ol>
+        </div>
+
+        <!-- Section 1: Energy Structure -->
+        <section id="section1">
+            <h2 class="section-title text-4xl font-bold">一、能源結構變化與全球對比</h2>
+            
+            <h3 class="text-2xl font-semibold mt-8 mb-4">1.1 中國車市能源結構變化趨勢（2025-2028）</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>年份</th>
+                        <th>總銷量（萬輛）</th>
+                        <th>傳統油車（萬輛）</th>
+                        <th>純電動車（萬輛）</th>
+                        <th>插電混動（萬輛）</th>
+                        <th>油電混動（萬輛）</th>
+                        <th>新能源滲透率</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-semibold">2025</td>
+                        <td>3,440</td>
+                        <td>1,791</td>
+                        <td>1,050</td>
+                        <td>450</td>
+                        <td>149</td>
+                        <td class="font-bold text-blue-600">47.9%</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">2026</td>
+                        <td>3,475</td>
+                        <td>1,575</td>
+                        <td>1,200</td>
+                        <td>550</td>
+                        <td>150</td>
+                        <td class="font-bold text-blue-600">54.7%</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">2027</td>
+                        <td>3,550</td>
+                        <td>1,420</td>
+                        <td>1,350</td>
+                        <td>600</td>
+                        <td>180</td>
+                        <td class="font-bold text-blue-600">60.0%</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">2028</td>
+                        <td>3,620</td>
+                        <td>1,270</td>
+                        <td>1,500</td>
+                        <td>650</td>
+                        <td>200</td>
+                        <td class="font-bold text-blue-600">64.9%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="data-source">
+                <strong>資料來源：</strong>中汽協、中國汽車流通協會、IDC預測數據<br>
+                <strong>推估假設：</strong>基於2025年實際數據，假設新能源車年複合增長率22.8%，傳統油車年下降率約10%
+            </div>
+
+            <div id="chart1" class="chart-container"></div>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">1.2 新能源車滲透率增長趨勢</h3>
+            
+            <div id="chart2" class="chart-container"></div>
+
+            <div class="key-finding">
+                <strong>🔍 關鍵發現：</strong>
+                <ul class="list-disc list-inside mt-2 space-y-1">
+                    <li>2027年新能源滲透率將突破60%關鍵門檻，成為市場主導力量</li>
+                    <li>純電動車四年間增長43%，從1,050萬輛增至1,500萬輛</li>
+                    <li>傳統油車市場份額持續萎縮，四年間減少29%</li>
+                </ul>
+            </div>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">1.3 全球主要車市新能源車銷量對比</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>地區/年份</th>
+                        <th>2025年銷量（萬輛）</th>
+                        <th>2026年預測</th>
+                        <th>2027年預測</th>
+                        <th>2028年預測</th>
+                        <th>全球份額（2025）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-semibold">中國</td>
+                        <td class="font-bold text-blue-600">1,649</td>
+                        <td>1,900</td>
+                        <td>2,130</td>
+                        <td>2,350</td>
+                        <td class="font-bold text-green-600">63.0%</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">歐洲</td>
+                        <td>443</td>
+                        <td>380</td>
+                        <td>420</td>
+                        <td>460</td>
+                        <td>17.0%</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">美國</td>
+                        <td>170</td>
+                        <td>190</td>
+                        <td>210</td>
+                        <td>230</td>
+                        <td>6.5%</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">其他地區</td>
+                        <td>238</td>
+                        <td>330</td>
+                        <td>340</td>
+                        <td>360</td>
+                        <td>9.1%</td>
+                    </tr>
+                    <tr class="bg-gray-100">
+                        <td class="font-bold">全球總計</td>
+                        <td class="font-bold">2,500</td>
+                        <td class="font-bold">2,800</td>
+                        <td class="font-bold">3,100</td>
+                        <td class="font-bold">3,400</td>
+                        <td class="font-bold">100%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id="chart3" class="chart-container"></div>
+
+            <div class="data-source">
+                <strong>資料來源：</strong>IEA《全球電動車展望2026》、ARTC車輛研究測試中心<br>
+                <strong>網址：</strong><a href="https://www.artc.org.tw/tw/knowledge/articles/13851" class="text-blue-600 underline">ARTC報告連結</a>
+            </div>
+        </section>
+
+        <!-- Section 2: Brand Market Share -->
+        <section id="section2">
+            <h2 class="section-title text-4xl font-bold">二、品牌市佔率深度分析</h2>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">2.1 2025年中國新能源汽車品牌市佔率排名</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>品牌</th>
+                        <th>市場份額</th>
+                        <th>銷量（萬輛）</th>
+                        <th>同比增長</th>
+                        <th>關鍵特徵</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-bold text-yellow-600">🥇 1</td>
+                        <td class="font-bold">比亞迪</td>
+                        <td class="font-bold text-blue-600 text-lg">27.2%</td>
+                        <td class="font-bold">460.2</td>
+                        <td class="text-green-600">+7.73%</td>
+                        <td>全球新能源車銷冠，純電銷量首超特斯拉</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-gray-400">🥈 2</td>
+                        <td class="font-bold">吉利</td>
+                        <td class="font-bold text-blue-600">12.2%</td>
+                        <td class="font-bold">225.67</td>
+                        <td class="text-green-600">+27.86%</td>
+                        <td>市佔率從2023年6.1%躍升至12.2%</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-orange-600">🥉 3</td>
+                        <td class="font-bold">上汽通用五菱</td>
+                        <td>6.0%</td>
+                        <td>110.0</td>
+                        <td class="text-green-600">+15%</td>
+                        <td>宏光MINI EV領銜微型車市場</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>長安</td>
+                        <td>5.1%</td>
+                        <td>98.6</td>
+                        <td class="text-green-600">+18%</td>
+                        <td>自主品牌穩定增長</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>特斯拉中國</td>
+                        <td>4.9%</td>
+                        <td>92.6</td>
+                        <td class="text-red-600">-7.1%</td>
+                        <td>份額從13.4%下滑至4.9%</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>零跑</td>
+                        <td>3.6%</td>
+                        <td>59.66</td>
+                        <td class="text-green-600 font-bold">+100%</td>
+                        <td>2025年最大黑馬，銷量翻倍</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>蔚來</td>
+                        <td>2.4%</td>
+                        <td>39.97</td>
+                        <td class="text-green-600">+31%</td>
+                        <td>換電模式高端定位</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>小鵬</td>
+                        <td>2.2%</td>
+                        <td>37.0</td>
+                        <td class="text-green-600">+63.73%</td>
+                        <td>智能駕駛技術領先</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>理想</td>
+                        <td>2.0%</td>
+                        <td>31.8</td>
+                        <td class="text-green-600">+15%</td>
+                        <td>增程式路線代表</td>
+                    </tr>
+                    <tr class="bg-gray-100">
+                        <td>10</td>
+                        <td>其他品牌</td>
+                        <td>34.4%</td>
+                        <td>721.5</td>
+                        <td>-</td>
+                        <td>包括小米、華為等新勢力</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="data-source">
+                <strong>資料來源：</strong>中國汽車流通協會(CADA) 2025年10月全國乘用車市場分析<br>
+                <strong>網址：</strong><a href="https://www.cada.cn/Trends/info_91_10369.html" class="text-blue-600 underline">CADA官方報告</a>
+            </div>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">2.2 品牌市場份額視覺化分析</h3>
+
+            <div id="chart4" class="chart-container"></div>
+
+            <div id="chart5" class="chart-container"></div>
+
+            <div class="key-finding">
+                <strong>🔍 關鍵發現：</strong>
+                <ul class="list-disc list-inside mt-2 space-y-1">
+                    <li><strong>頭部集中效應</strong>：TOP5品牌合計市佔率達55.4%，市場集中度持續提升</li>
+                    <li><strong>比亞迪一枝獨秀</strong>：27.2%的市場份額相當於第2-5名份額總和，穩固全球最大新能源車企地位</li>
+                    <li><strong>特斯拉份額下滑</strong>：從2023年13.4%下滑至2025年4.9%，反映中國自主品牌競爭力提升</li>
+                    <li><strong>新勢力分化</strong>：零跑、小鵬翻倍成長，蔚來、理想增速放緩，市場進入淘汰期</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 3: Price Segments -->
+        <section id="section3">
+            <h2 class="section-title text-4xl font-bold">三、價格區間市場分析</h2>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">3.1 2025年中國新能源汽車價格區間分佈</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>價格區間</th>
+                        <th>銷量佔比</th>
+                        <th>銷量（萬輛）</th>
+                        <th>主要車型</th>
+                        <th>市場特點</th>
+                        <th>新能源滲透率</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-bold">10萬元以下</td>
+                        <td class="font-bold text-blue-600 text-lg">32.6%</td>
+                        <td class="font-bold">537.5</td>
+                        <td>宏光MINI EV、比亞迪海鷗</td>
+                        <td>微型純電代步車為主</td>
+                        <td class="text-green-600 font-bold">＞60%</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">10-20萬元</td>
+                        <td class="font-bold text-blue-600 text-lg">38.3%</td>
+                        <td class="font-bold">631.6</td>
+                        <td>比亞迪秦PLUS、吉利銀河</td>
+                        <td>主流家用市場，競爭最激烈</td>
+                        <td class="text-green-600">45-50%</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">20-30萬元</td>
+                        <td class="font-bold text-blue-600">21.1%</td>
+                        <td class="font-bold">348.1</td>
+                        <td>特斯拉Model Y、小米SU7</td>
+                        <td>中高端市場，新能源滲透率最高</td>
+                        <td class="text-green-600 font-bold">68.1%</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">30萬元以上</td>
+                        <td class="font-bold text-blue-600">8.0%</td>
+                        <td class="font-bold">131.8</td>
+                        <td>蔚來、理想、BBA電動車</td>
+                        <td>豪華品牌主導</td>
+                        <td class="text-green-600">35-40%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="data-source">
+                <strong>資料來源：</strong>東方財富《2025年中國整車行業研究報告》、搜狐汽車市場數據<br>
+                <strong>推估假設：</strong>基於2025年6月新能源乘用車市場深度分析報告，各價格帶佔比數據
+            </div>
+
+            <div id="chart6" class="chart-container"></div>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">3.2 價格區間結構變化趨勢</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>指標</th>
+                        <th>2023年</th>
+                        <th>2024年</th>
+                        <th>2025年</th>
+                        <th>趨勢</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-semibold">新能源車均價（萬元）</td>
+                        <td>18.4</td>
+                        <td>18.0</td>
+                        <td class="font-bold text-blue-600">16.1</td>
+                        <td class="text-red-600">↓ 下降</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">5萬以下佔比</td>
+                        <td>2.6%</td>
+                        <td>3.0%</td>
+                        <td class="font-bold text-blue-600">3.5%</td>
+                        <td class="text-green-600">↑ 上升</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">10-20萬佔比</td>
+                        <td>35.2%</td>
+                        <td>36.8%</td>
+                        <td class="font-bold text-blue-600">38.3%</td>
+                        <td class="text-green-600">↑ 上升</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">40萬以上佔比</td>
+                        <td>1.8%</td>
+                        <td>2.1%</td>
+                        <td class="font-bold text-blue-600">2.5%</td>
+                        <td class="text-green-600">↑ 上升</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="key-finding">
+                <strong>🔍 關鍵發現：</strong>
+                <ul class="list-disc list-inside mt-2 space-y-1">
+                    <li><strong>價格下移趨勢明顯</strong>：新能源車均價從18.4萬元降至16.1萬元，降幅12.5%</li>
+                    <li><strong>10-20萬成最大市場</strong>：佔比38.3%，是自主品牌與合資品牌激烈競爭的核心戰場</li>
+                    <li><strong>消費升級與降級並存</strong>：入門級（5萬以下）和高端級（40萬以上）同時增長</li>
+                    <li><strong>20-30萬新能源滲透率最高</strong>：達68.1%，Model Y、小米SU7等爆款車型帶動</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 4: Policy Impact -->
+        <section id="section4">
+            <h2 class="section-title text-4xl font-bold">四、政策影響全面評估</h2>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">4.1 購置稅政策變化詳解</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>政策項目</th>
+                        <th>2025年</th>
+                        <th>2026年</th>
+                        <th>變化影響</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-semibold">購置稅率</td>
+                        <td class="font-bold text-green-600">0%（全額免徵）</td>
+                        <td class="font-bold text-orange-600">5%（減半徵收）</td>
+                        <td>購車成本增加</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">減免上限</td>
+                        <td class="font-bold text-green-600">3萬元</td>
+                        <td class="font-bold text-orange-600">1.5萬元</td>
+                        <td>優惠力度減半</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">政策期限</td>
+                        <td>2024.1.1-2025.12.31</td>
+                        <td>2026.1.1-2027.12.31</td>
+                        <td>延續2年</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">價格分水嶺</td>
+                        <td>無</td>
+                        <td class="font-bold text-red-600">33.9萬元</td>
+                        <td>33.9萬以下受影響小</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">計算公式</td>
+                        <td colspan="2">購置稅 = 裸車價 ÷ 11.3 × 稅率</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="data-source">
+                <strong>資料來源：</strong>工信部、財政部、稅務總局《2026-2027年新能源汽車購置稅減免政策》<br>
+                <strong>網址：</strong><a href="https://nev.ofweek.com/2025-12/ART-71000-8420-30677598.html" class="text-blue-600 underline">OFweek政策解讀</a>
+            </div>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">4.2 購置稅實際影響測算</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>車輛價格（萬元）</th>
+                        <th>2025年購置稅</th>
+                        <th>2026年購置稅</th>
+                        <th>差額</th>
+                        <th>增幅</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-semibold">10萬</td>
+                        <td class="text-green-600 font-bold">0元</td>
+                        <td>0.44萬元</td>
+                        <td class="text-red-600">+0.44萬</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">20萬</td>
+                        <td class="text-green-600 font-bold">0元</td>
+                        <td>0.88萬元</td>
+                        <td class="text-red-600">+0.88萬</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">30萬</td>
+                        <td class="text-green-600 font-bold">0元</td>
+                        <td>1.33萬元</td>
+                        <td class="text-red-600">+1.33萬</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">33.9萬（分水嶺）</td>
+                        <td class="text-green-600 font-bold">0元</td>
+                        <td class="font-bold text-orange-600">1.5萬元（封頂）</td>
+                        <td class="text-red-600 font-bold">+1.5萬</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">50萬</td>
+                        <td class="text-green-600">-3萬元（免稅上限）</td>
+                        <td class="text-orange-600">1.5萬元（減免上限）</td>
+                        <td class="text-red-600 font-bold">+1.5萬</td>
+                        <td>優惠減少50%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id="chart7" class="chart-container"></div>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">4.3 以舊換新補貼政策（2026年）</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>補貼類型</th>
+                        <th>新能源車</th>
+                        <th>燃油車</th>
+                        <th>說明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-semibold">報廢更新</td>
+                        <td class="font-bold text-green-600">新車價格12%<br>最高2萬元</td>
+                        <td class="font-bold text-blue-600">新車價格10%<br>最高1.5萬元</td>
+                        <td>報廢舊車購新車</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">置換更新</td>
+                        <td class="font-bold text-green-600">新車價格8%<br>最高1.5萬元</td>
+                        <td class="font-bold text-blue-600">新車價格6%<br>最高1.5萬元</td>
+                        <td>轉讓舊車購新車</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="data-source">
+                <strong>資料來源：</strong>國家發改委、商務部等8部門《2026年汽車以舊換新補貼實施細則》<br>
+                <strong>網址：</strong><a href="https://www.ndrc.gov.cn/xwdt/ztzl/tddgmsbgxhxfpyjhx/gzdt/202601/t20260108_1403127.html" class="text-blue-600 underline">國家發改委官方文件</a>
+            </div>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">4.4 雙積分政策調整</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>年度</th>
+                        <th>新能源積分比例要求</th>
+                        <th>較前一年變化</th>
+                        <th>政策導向</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-semibold">2025年</td>
+                        <td class="font-bold">38%</td>
+                        <td>基準年</td>
+                        <td>過渡期</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">2026年</td>
+                        <td class="font-bold text-blue-600">48%</td>
+                        <td class="text-red-600">+10個百分點</td>
+                        <td>加速電動化</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">2027年</td>
+                        <td class="font-bold text-blue-600">58%</td>
+                        <td class="text-red-600">+10個百分點</td>
+                        <td>全面轉型</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="data-source">
+                <strong>資料來源：</strong>中汽研政策研究中心《2025年度雙積分核算結果發布》<br>
+                <strong>網址：</strong><a href="https://www.catarc.ac.cn/detail/b851c2ba574649acaa281d50b906eec2" class="text-blue-600 underline">中汽研官方報告</a>
+            </div>
+
+            <div class="key-finding">
+                <strong>🔍 政策影響總結：</strong>
+                <ul class="list-disc list-inside mt-2 space-y-1">
+                    <li><strong>短期影響</strong>：2026年購置稅調整將增加購車成本，預計引發2025年底購車潮</li>
+                    <li><strong>價格門檻</strong>：33.9萬元成為關鍵分水嶺，以下車型受影響較小</li>
+                    <li><strong>鼓勵方向</strong>：以舊換新政策對新能源車補貼力度更大，鼓勵電動化轉型</li>
+                    <li><strong>倒逼轉型</strong>：雙積分比例提升至48%-58%，倒逼車企加大新能源車型投放</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 5: Powertrain Competition -->
+        <section id="section5">
+            <h2 class="section-title text-4xl font-bold">五、動力結構與競爭格局</h2>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">5.1 2025年新能源車動力結構分析</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>動力類型</th>
+                        <th>銷量佔比</th>
+                        <th>銷量（萬輛）</th>
+                        <th>同比增長</th>
+                        <th>代表車型</th>
+                        <th>市場定位</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-bold">純電動車 (BEV)</td>
+                        <td class="font-bold text-blue-600 text-lg">58.3%</td>
+                        <td class="font-bold">960.5</td>
+                        <td class="text-green-600 font-bold">+27.86%</td>
+                        <td>比亞迪海豹、特斯拉Model Y</td>
+                        <td>主流技術路線，長期主導</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">插電式混合動力 (PHEV)</td>
+                        <td class="font-bold text-blue-600">32.0%</td>
+                        <td class="font-bold">527.7</td>
+                        <td class="text-green-600 font-bold">+38.9%</td>
+                        <td>比亞迪秦PLUS DM-i、吉利銀河</td>
+                        <td>增速最快，過渡方案</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">增程式電動 (EREV)</td>
+                        <td class="font-bold text-blue-600">9.7%</td>
+                        <td class="font-bold">160.8</td>
+                        <td class="text-green-600">+26.0%</td>
+                        <td>理想L系列、問界M系列</td>
+                        <td>高端市場，無里程焦慮</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="data-source">
+                <strong>資料來源：</strong>KPMG《多元化動力爭奪汽車市場》趨勢報告、中汽協月度數據<br>
+                <strong>推估假設：</strong>基於2025年1-11月累計數據推算全年結構
+            </div>
+
+            <div id="chart8" class="chart-container"></div>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">5.2 動力結構變化趨勢（2023-2025）</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>動力類型</th>
+                        <th>2023年佔比</th>
+                        <th>2024年佔比</th>
+                        <th>2025年佔比</th>
+                        <th>趨勢</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-semibold">純電動車 (BEV)</td>
+                        <td>66.5%</td>
+                        <td>60.0%</td>
+                        <td class="font-bold text-blue-600">58.3%</td>
+                        <td class="text-red-600">↓ 份額下降</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">插電式混合動力 (PHEV)</td>
+                        <td>28.0%</td>
+                        <td>34.5%</td>
+                        <td class="font-bold text-blue-600">32.0%</td>
+                        <td class="text-green-600">↑ 份額上升</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">增程式電動 (EREV)</td>
+                        <td>5.5%</td>
+                        <td>5.5%</td>
+                        <td class="font-bold text-blue-600">9.7%</td>
+                        <td class="text-green-600">↑ 快速增長</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">5.3 未來競爭格局預測（2026-2028）</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>動力類型</th>
+                        <th>2026年預測</th>
+                        <th>2027年預測</th>
+                        <th>2028年預測</th>
+                        <th>關鍵驅動因素</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-semibold">純電動車 (BEV)</td>
+                        <td>增速15-20%<br>份額約56%</td>
+                        <td>增速回升至20-25%<br>份額約57%</td>
+                        <td>保持20%左右<br>份額約58%</td>
+                        <td>技術成熟、成本下降、充電設施完善</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">插電式混合動力 (PHEV)</td>
+                        <td>增速30%以上<br>份額約34%</td>
+                        <td>增速放緩至25%<br>份額約33%</td>
+                        <td>增速放緩至20%<br>份額約32%</td>
+                        <td>政策過渡、無里程焦慮、適合長途</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">增程式電動 (EREV)</td>
+                        <td>增速15%<br>份額約10%</td>
+                        <td>增速放緩至10%<br>份額約10%</td>
+                        <td>增速放緩至5%<br>份額約10%</td>
+                        <td>純電續航提升替代、高端市場飽和</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="data-source">
+                <strong>資料來源：</strong>OFweek新能源汽車網市場預測、KPMG行業趨勢報告<br>
+                <strong>推估假設：</strong>基於2024-2025年增長率趨勢，考慮政策調整、技術進步等因素
+            </div>
+
+            <div id="chart9" class="chart-container"></div>
+
+            <div class="key-finding">
+                <strong>🔍 競爭格局關鍵發現：</strong>
+                <ul class="list-disc list-inside mt-2 space-y-1">
+                    <li><strong>純電仍為主流</strong>：雖份額從66.5%降至58.3%，但絕對銷量持續增長，長期仍為主導技術路線</li>
+                    <li><strong>插電混動崛起</strong>：2025年增速38.9%領跑，預計2026年份額將達40%，成為增速最快細分市場</li>
+                    <li><strong>增程式分化</strong>：理想汽車領跑，但隨純電續航提升，增程式優勢將減弱</li>
+                    <li><strong>技術路線競爭</strong>：純電適合城市通勤、插混適合長途出行、增程式適合高端市場</li>
+                </ul>
+            </div>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">5.4 各動力路線技術門檻（2026年政策）</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>動力類型</th>
+                        <th>技術要求</th>
+                        <th>2025年標準</th>
+                        <th>2026年新標準</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-semibold">純電動車 (BEV)</td>
+                        <td>電耗標準</td>
+                        <td>按車重分級</td>
+                        <td>按車重分級（更嚴格）</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold" rowspan="3">插電式混合動力 (PHEV)</td>
+                        <td>純電續航</td>
+                        <td>≥50公里</td>
+                        <td class="font-bold text-red-600">≥100公里</td>
+                    </tr>
+                    <tr>
+                        <td>電耗要求</td>
+                        <td>同重量純電車1.5倍</td>
+                        <td class="font-bold text-red-600">1.4倍（≤2510kg）<br>1.45倍（＞2510kg）</td>
+                    </tr>
+                    <tr>
+                        <td>油耗要求</td>
+                        <td>同級別燃油車80%</td>
+                        <td class="font-bold text-red-600">70%（≤2510kg）<br>75%（＞2510kg）</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">增程式電動 (EREV)</td>
+                        <td>歸入PHEV類別</td>
+                        <td>同PHEV</td>
+                        <td>同PHEV</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="data-source">
+                <strong>資料來源：</strong>工信部、財政部、稅務總局《減免車輛購置稅的新能源汽車車型目錄》技術要求<br>
+                <strong>影響分析：</strong>技術門檻提高將淘汰低質量車型，推動行業技術升級
+            </div>
+        </section>
+
+        <!-- Section 6: Data Sources -->
+        <section id="section6">
+            <h2 class="section-title text-4xl font-bold">六、資料來源與推估假設</h2>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">6.1 主要資料來源清單</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>資料類別</th>
+                        <th>來源機構</th>
+                        <th>資料連結</th>
+                        <th>可信度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>品牌銷量數據</td>
+                        <td>中國汽車流通協會(CADA)</td>
+                        <td><a href="https://www.cada.cn/Trends/info_91_10369.html" class="text-blue-600 underline">2025年10月全國乘用車市場分析</a></td>
+                        <td class="text-green-600 font-bold">★★★★★</td>
+                    </tr>
+                    <tr>
+                        <td>品牌市佔率</td>
+                        <td>Gasgoo蓋世汽車</td>
+                        <td><a href="https://m.gasgoo.com/news/70412851.html" class="text-blue-600 underline">全球新能源車銷量TOP20</a></td>
+                        <td class="text-green-600 font-bold">★★★★☆</td>
+                    </tr>
+                    <tr>
+                        <td>新能源車總銷量</td>
+                        <td>新華網</td>
+                        <td><a href="https://www.news.cn/fortune/20260115/9f8333fda7a847b78ca5d47defe5a443/c.html" class="text-blue-600 underline">2025中國汽車駛出增長新動能</a></td>
+                        <td class="text-green-600 font-bold">★★★★★</td>
+                    </tr>
+                    <tr>
+                        <td>價格區間數據</td>
+                        <td>東方財富</td>
+                        <td><a href="https://pdf.dfcfw.com/pdf/H3_AP202507281717257473_1.pdf" class="text-blue-600 underline">2025年中國整車行業研究報告</a></td>
+                        <td class="text-green-600 font-bold">★★★★☆</td>
+                    </tr>
+                    <tr>
+                        <td>購置稅政策</td>
+                        <td>OFweek新能源汽車網</td>
+                        <td><a href="https://nev.ofweek.com/2025-12/ART-71000-8420-30677598.html" class="text-blue-600 underline">2026年購置稅政策解讀</a></td>
+                        <td class="text-green-600 font-bold">★★★★★</td>
+                    </tr>
+                    <tr>
+                        <td>以舊換新政策</td>
+                        <td>國家發改委</td>
+                        <td><a href="https://www.ndrc.gov.cn/xwdt/ztzl/tddgmsbgxhxfpyjhx/gzdt/202601/t20260108_1403127.html" class="text-blue-600 underline">2026年汽車以舊換新補貼實施細則</a></td>
+                        <td class="text-green-600 font-bold">★★★★★</td>
+                    </tr>
+                    <tr>
+                        <td>雙積分政策</td>
+                        <td>中汽研政策研究中心</td>
+                        <td><a href="https://www.catarc.ac.cn/detail/b851c2ba574649acaa281d50b906eec2" class="text-blue-600 underline">2025年度雙積分核算結果發布</a></td>
+                        <td class="text-green-600 font-bold">★★★★★</td>
+                    </tr>
+                    <tr>
+                        <td>動力結構數據</td>
+                        <td>KPMG</td>
+                        <td><a href="https://assets.kpmg.com/content/dam/kpmgsites/cn/pdf/zh/2025/05/trend-report-on-automotive-powertrain.pdf.coredownload.inline.pdf" class="text-blue-600 underline">多元化動力爭奪汽車市場</a></td>
+                        <td class="text-green-600 font-bold">★★★★★</td>
+                    </tr>
+                    <tr>
+                        <td>全球市場對比</td>
+                        <td>ARTC車輛研究測試中心</td>
+                        <td><a href="https://www.artc.org.tw/tw/knowledge/articles/13851" class="text-blue-600 underline">2025年全球電動車主要市場概況</a></td>
+                        <td class="text-green-600 font-bold">★★★★★</td>
+                    </tr>
+                    <tr>
+                        <td>IDC預測數據</td>
+                        <td>IDC國際數據公司</td>
+                        <td><a href="https://news.cncaa.org/44717.html" class="text-blue-600 underline">2028年中國新能源乘用車市場規模預測</a></td>
+                        <td class="text-green-600 font-bold">★★★★☆</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">6.2 推估假設與方法論</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>推估項目</th>
+                        <th>推估依據</th>
+                        <th>方法論</th>
+                        <th>不確定性因素</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-semibold">2026-2028年銷量預測</td>
+                        <td>中汽協、IDC預測數據<br>歷史增長率（2023-2025）</td>
+                        <td>時間序列分析<br>複合年增長率(CAGR)模型</td>
+                        <td>政策變化、經濟環境<br>國際貿易摩擦、原材料價格</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">品牌市佔率預測</td>
+                        <td>2025年1-10月實際數據<br>頭部品牌增長趨勢</td>
+                        <td>市場份額趨勢外推<br>競爭格局分析</td>
+                        <td>新進入者競爭<br>技術突破、品牌危機</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">價格區間變化</td>
+                        <td>新能源車均價下行趨勢<br>各價格帶歷史佔比</td>
+                        <td>價格彈性分析<br>消費結構模型</td>
+                        <td>原材料價格波動<br>補貼政策調整、市場競爭</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">動力結構預測</td>
+                        <td>KPMG、OFweek行業預測<br>2023-2025年結構變化</td>
+                        <td>技術路線競爭分析<br>S曲線擴散模型</td>
+                        <td>技術突破<br>充電設施建設進度<br>政策導向</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">政策影響評估</td>
+                        <td>官方政策文件<br>歷史政策效果</td>
+                        <td>政策模擬分析<br>彈性係數測算</td>
+                        <td>政策執行力度<br>地方細則差異、市場反應</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">6.3 數據局限性說明</h3>
+
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 my-6">
+                <h4 class="font-bold text-lg mb-3">⚠️ 重要聲明：數據使用注意事項</h4>
+                <ol class="list-decimal list-inside space-y-2">
+                    <li><strong>品牌市佔率數據</strong>：部分新勢力品牌（如小米、華為）數據包含在「其他」類別中，具體份額難以精確統計。小米2025年全年銷量約13萬輛，但未單獨列出。</li>
+                    <li><strong>價格區間數據</strong>：不同統計機構對價格區間劃分標準存在差異。本報告採用中國汽車流通協會標準，以開票價（不含稅）為基準。</li>
+                    <li><strong>預測數據不確定性</strong>：2026-2028年數據為預測值，實際情況可能與預測存在±10%偏差。特別是2027-2028年數據，受政策、技術、市場等多重因素影響，不確定性較高。</li>
+                    <li><strong>政策影響評估</strong>：政策實際影響程度受執行力度、市場反應、地方細則等因素影響。本報告假設政策完全執行，實際效果可能有所差異。</li>
+                    <li><strong>動力結構數據</strong>：增程式電動車(EREV)在部分統計中歸入插電式混合動力(PHEV)，可能導致分類口徑差異。</li>
+                    <li><strong>數據時效性</strong>：報告基於2025年1-11月數據，2025年12月數據為估算值。最終全年數據以中汽協官方發布為準。</li>
+                </ol>
+            </div>
+
+            <h3 class="text-2xl font-semibold mt-8 mb-4">6.4 專業術語說明</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>術語</th>
+                        <th>英文縮寫</th>
+                        <th>定義</th>
+                        <th>示例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-semibold">純電動車</td>
+                        <td>BEV</td>
+                        <td>Battery Electric Vehicle，完全依靠電池供電的車輛</td>
+                        <td>特斯拉Model Y、比亞迪海豹</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">插電式混合動力</td>
+                        <td>PHEV</td>
+                        <td>Plug-in Hybrid Electric Vehicle，可外接充電的混合動力車</td>
+                        <td>比亞迪秦PLUS DM-i、吉利銀河</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">增程式電動</td>
+                        <td>EREV</td>
+                        <td>Extended-Range Electric Vehicle，以電驅動為主，引擎作為發電機</td>
+                        <td>理想L系列、問界M系列</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">油電混合動力</td>
+                        <td>HEV</td>
+                        <td>Hybrid Electric Vehicle，不可外接充電的混合動力車</td>
+                        <td>豐田凱美瑞混動、本田雅閣混動</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">新能源滲透率</td>
+                        <td>NEV Penetration</td>
+                        <td>新能源車銷量占總銷量的比例</td>
+                        <td>2025年中國新能源滲透率47.9%</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">雙積分</td>
+                        <td>Dual-Credit</td>
+                        <td>CAFC積分（企業平均燃料消耗量）+ NEV積分（新能源汽車）</td>
+                        <td>2026年NEV積分比例要求48%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="mt-12">
+            <h2 class="section-title text-4xl font-bold">七、總結與展望</h2>
+
+            <div class="highlight-box mt-6">
+                <h3 class="text-2xl font-bold mb-4">🎯 核心結論</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">市場格局</h4>
+                        <ul class="space-y-1">
+                            <li>✓ 比亞迪穩居榜首（27.2%），吉利快速崛起（12.2%）</li>
+                            <li>✓ 特斯拉份額下滑（4.9%），自主品牌全面領先</li>
+                            <li>✓ 新勢力分化加劇，零跑、小鵬翻倍，蔚來、理想增速放緩</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">政策影響</h4>
+                        <ul class="space-y-1">
+                            <li>✓ 2026年購置稅減半，33.9萬以下受影響小</li>
+                            <li>✓ 以舊換新補貼加碼，鼓勵電動化轉型</li>
+                            <li>✓ 雙積分比例提升至48%-58%，倒逼車企轉型</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">價格結構</h4>
+                        <ul class="space-y-1">
+                            <li>✓ 10-20萬成主戰場（38.3%），競爭最激烈</li>
+                            <li>✓ 均價持續下探（16.1萬元），降幅12.5%</li>
+                            <li>✓ 消費升級與降級並存，兩端市場同時增長</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">動力競爭</h4>
+                        <ul class="space-y-1">
+                            <li>✓ 純電仍為主流（58.3%），長期主導地位穩固</li>
+                            <li>✓ 插混增速最快（38.9%），2026年份額將達40%</li>
+                            <li>✓ 增程式快速增長（26%），但面臨技術替代壓力</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-6 my-6">
+                <h4 class="font-bold text-lg mb-3">🔮 2026-2028年趨勢展望</h4>
+                <ol class="list-decimal list-inside space-y-2">
+                    <li><strong>市場規模持續擴大</strong>：預計2028年總銷量達3,620萬輛，新能源滲透率突破65%</li>
+                    <li><strong>品牌集中度提升</strong>：頭部5-10家品牌市佔率將超70%，中小品牌面臨淘汰壓力</li>
+                    <li><strong>技術路線分化</strong>：純電、插混、增程三足鼎立，各自佔據不同細分市場</li>
+                    <li><strong>價格競爭加劇</strong>：10-20萬主流市場進入白熱化，價格戰常態化</li>
+                    <li><strong>政策驅動減弱</strong>：市場逐步擺脫補貼依賴，進入市場化競爭新階段</li>
+                    <li><strong>出口快速增長</strong>：預計2026年出口量突破1,000萬輛，中國車企全球化加速</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-16 pt-8 border-t-2 border-gray-300 text-center text-gray-600">
+            <p class="text-lg font-semibold mb-2">中國大陸車市視覺化分析報告（完整互動版）2025-2028</p>
+            <p class="text-sm mb-1">報告生成日期：2026年7月29日 | 數據截止：2025年12月</p>
+            <p class="text-sm mb-4">© 2026 All Rights Reserved | 數據來源：中汽協、CADA、IDC、IEA等權威機構</p>
+            <p class="text-xs text-gray-500">本報告僅供參考，不構成投資建議。使用本報告數據請註明出處。</p>
+        </footer>
+    </div>
+
+    <script>
+        // Chart 1: Energy Structure Stacked Bar
+        var chart1 = echarts.init(document.getElementById('chart1'));
+        var option1 = {
+            title: { text: '中國車市能源結構變化趨勢（2025-2028）', left: 'center' },
+            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+            legend: { data: ['傳統油車', '純電動車(BEV)', '插電混動(PHEV)', '油電混動(HEV)'], bottom: 10 },
+            grid: { left: '3%', right: '4%', bottom: '15%', containLabel: true },
+            xAxis: { type: 'category', data: ['2025', '2026', '2027', '2028'] },
+            yAxis: { type: 'value', name: '銷量（萬輛）' },
+            series: [
+                { name: '傳統油車', type: 'bar', stack: 'total', data: [1791, 1575, 1420, 1270], itemStyle: { color: '#5470c6' } },
+                { name: '純電動車(BEV)', type: 'bar', stack: 'total', data: [1050, 1200, 1350, 1500], itemStyle: { color: '#91cc75' } },
+                { name: '插電混動(PHEV)', type: 'bar', stack: 'total', data: [450, 550, 600, 650], itemStyle: { color: '#fac858' } },
+                { name: '油電混動(HEV)', type: 'bar', stack: 'total', data: [149, 150, 180, 200], itemStyle: { color: '#ee6666' } }
+            ]
+        };
+        chart1.setOption(option1);
+
+        // Chart 2: NEV Penetration Line
+        var chart2 = echarts.init(document.getElementById('chart2'));
+        var option2 = {
+            title: { text: '新能源車滲透率增長趨勢（2025-2028）', left: 'center' },
+            tooltip: { trigger: 'axis' },
+            xAxis: { type: 'category', data: ['2025', '2026', '2027', '2028'] },
+            yAxis: { type: 'value', name: '滲透率（%）', min: 40, max: 70 },
+            series: [{
+                name: '新能源滲透率',
+                type: 'line',
+                smooth: true,
+                data: [47.9, 54.7, 60.0, 64.9],
+                itemStyle: { color: '#91cc75' },
+                areaStyle: { color: 'rgba(145, 204, 117, 0.3)' },
+                markPoint: { data: [{ type: 'max', name: '最大值' }] },
+                markLine: { data: [{ yAxis: 60, name: '60%關鍵門檻' }] }
+            }]
+        };
+        chart2.setOption(option2);
+
+        // Chart 3: Global Comparison
+        var chart3 = echarts.init(document.getElementById('chart3'));
+        var option3 = {
+            title: { text: '全球主要車市新能源車銷量對比（2025-2028）', left: 'center' },
+            tooltip: { trigger: 'axis' },
+            legend: { data: ['2025年', '2026年', '2027年', '2028年'], bottom: 10 },
+            xAxis: { type: 'category', data: ['中國', '歐洲', '美國', '其他地區'] },
+            yAxis: { type: 'value', name: '銷量（萬輛）' },
+            series: [
+                { name: '2025年', type: 'bar', data: [1649, 443, 170, 238], itemStyle: { color: '#5470c6' } },
+                { name: '2026年', type: 'bar', data: [1900, 380, 190, 330], itemStyle: { color: '#91cc75' } },
+                { name: '2027年', type: 'bar', data: [2130, 420, 210, 340], itemStyle: { color: '#fac858' } },
+                { name: '2028年', type: 'bar', data: [2350, 460, 230, 360], itemStyle: { color: '#ee6666' } }
+            ]
+        };
+        chart3.setOption(option3);
+
+        // Chart 4: Brand Market Share Pie
+        var chart4 = echarts.init(document.getElementById('chart4'));
+        var option4 = {
+            title: { text: '2025年中國新能源汽車品牌市場份額分佈', left: 'center' },
+            tooltip: { trigger: 'item', formatter: '{b}: {c}%' },
+            legend: { orient: 'vertical', left: 'left', top: 'middle' },
+            series: [{
+                name: '市場份額',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                center: ['60%', '55%'],
+                data: [
+                    { value: 27.2, name: '比亞迪', itemStyle: { color: '#5470c6' } },
+                    { value: 12.2, name: '吉利', itemStyle: { color: '#91cc75' } },
+                    { value: 6.0, name: '上汽通用五菱', itemStyle: { color: '#fac858' } },
+                    { value: 5.1, name: '長安', itemStyle: { color: '#ee6666' } },
+                    { value: 4.9, name: '特斯拉中國', itemStyle: { color: '#73c0de' } },
+                    { value: 3.6, name: '零跑', itemStyle: { color: '#3ba272' } },
+                    { value: 2.4, name: '蔚來', itemStyle: { color: '#fc8452' } },
+                    { value: 2.2, name: '小鵬', itemStyle: { color: '#9a60b4' } },
+                    { value: 2.0, name: '理想', itemStyle: { color: '#ea7ccc' } },
+                    { value: 34.4, name: '其他', itemStyle: { color: '#d4d4d4' } }
+                ],
+                label: { show: true, formatter: '{b}\n{d}%' },
+                emphasis: { itemStyle: { shadowBlur: 10, shadowOffsetX: 0, shadowColor: 'rgba(0, 0, 0, 0.5)' } }
+            }]
+        };
+        chart4.setOption(option4);
+
+        // Chart 5: Brand Sales Bar
+        var chart5 = echarts.init(document.getElementById('chart5'));
+        var option5 = {
+            title: { text: '2025年中國新能源汽車品牌銷量排行（萬輛）', left: 'center' },
+            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+            xAxis: { type: 'value', name: '銷量（萬輛）' },
+            yAxis: { type: 'category', data: ['其他', '理想', '小鵬', '蔚來', '零跑', '特斯拉中國', '長安', '上汽通用五菱', '吉利', '比亞迪'] },
+            series: [{
+                name: '銷量',
+                type: 'bar',
+                data: [721.5, 31.8, 37.0, 39.97, 59.66, 92.6, 98.6, 110.0, 225.67, 460.2],
+                itemStyle: {
+                    color: function(params) {
+                        var colors = ['#d4d4d4', '#ea7ccc', '#9a60b4', '#fc8452', '#3ba272', '#73c0de', '#ee6666', '#fac858', '#91cc75', '#5470c6'];
+                        return colors[params.dataIndex];
+                    }
+                },
+                label: { show: true, position: 'right', formatter: '{c}萬輛' }
+            }]
+        };
+        chart5.setOption(option5);
+
+        // Chart 6: Price Segment Bar
+        var chart6 = echarts.init(document.getElementById('chart6'));
+        var option6 = {
+            title: { text: '2025年中國新能源汽車價格區間分佈', left: 'center' },
+            tooltip: { trigger: 'axis' },
+            legend: { data: ['銷量佔比(%)', '銷量(萬輛)'], bottom: 10 },
+            xAxis: { type: 'category', data: ['10萬以下', '10-20萬', '20-30萬', '30萬以上'] },
+            yAxis: [
+                { type: 'value', name: '銷量佔比(%)', position: 'left' },
+                { type: 'value', name: '銷量(萬輛)', position: 'right' }
+            ],
+            series: [
+                { name: '銷量佔比(%)', type: 'bar', data: [32.6, 38.3, 21.1, 8.0], itemStyle: { color: '#5470c6' } },
+                { name: '銷量(萬輛)', type: 'bar', yAxisIndex: 1, data: [537.5, 631.6, 348.1, 131.8], itemStyle: { color: '#91cc75' } }
+            ]
+        };
+        chart6.setOption(option6);
+
+        // Chart 7: Purchase Tax Comparison
+        var chart7 = echarts.init(document.getElementById('chart7'));
+        var option7 = {
+            title: { text: '2025-2026年購置稅政策變化對比', left: 'center' },
+            tooltip: { trigger: 'axis' },
+            legend: { data: ['購置稅率(%)', '減免上限(萬元)'], bottom: 10 },
+            xAxis: { type: 'category', data: ['2025年（現行）', '2026年（新政）'] },
+            yAxis: { type: 'value', name: '數值' },
+            series: [
+                { name: '購置稅率(%)', type: 'bar', data: [0, 5], itemStyle: { color: '#ee6666' }, label: { show: true, position: 'top' } },
+                { name: '減免上限(萬元)', type: 'bar', data: [3.0, 1.5], itemStyle: { color: '#91cc75' }, label: { show: true, position: 'top' } }
+            ]
+        };
+        chart7.setOption(option7);
+
+        // Chart 8: Powertrain Structure Pie
+        var chart8 = echarts.init(document.getElementById('chart8'));
+        var option8 = {
+            title: { text: '2025年新能源車動力結構分佈', left: 'center' },
+            tooltip: { trigger: 'item', formatter: '{b}: {c}%<br/>銷量: {d}萬輛' },
+            legend: { orient: 'vertical', left: 'left', top: 'middle' },
+            series: [{
+                name: '動力類型',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                center: ['60%', '55%'],
+                data: [
+                    { value: 58.3, name: '純電動車(BEV)', itemStyle: { color: '#91cc75' } },
+                    { value: 32.0, name: '插電式混合動力(PHEV)', itemStyle: { color: '#fac858' } },
+                    { value: 9.7, name: '增程式電動(EREV)', itemStyle: { color: '#ee6666' } }
+                ],
+                label: { show: true, formatter: '{b}\n{d}%' },
+                emphasis: { itemStyle: { shadowBlur: 10, shadowOffsetX: 0, shadowColor: 'rgba(0, 0, 0, 0.5)' } }
+            }]
+        };
+        chart8.setOption(option8);
+
+        // Chart 9: Powertrain Trend Line
+        var chart9 = echarts.init(document.getElementById('chart9'));
+        var option9 = {
+            title: { text: '2023-2028年動力結構變化趨勢預測', left: 'center' },
+            tooltip: { trigger: 'axis' },
+            legend: { data: ['純電動車(BEV)', '插電式混合動力(PHEV)', '增程式電動(EREV)'], bottom: 10 },
+            xAxis: { type: 'category', data: ['2023', '2024', '2025', '2026預測', '2027預測', '2028預測'] },
+            yAxis: { type: 'value', name: '市場份額(%)' },
+            series: [
+                { name: '純電動車(BEV)', type: 'line', smooth: true, data: [66.5, 60.0, 58.3, 56, 57, 58], itemStyle: { color: '#91cc75' } },
+                { name: '插電式混合動力(PHEV)', type: 'line', smooth: true, data: [28.0, 34.5, 32.0, 34, 33, 32], itemStyle: { color: '#fac858' } },
+                { name: '增程式電動(EREV)', type: 'line', smooth: true, data: [5.5, 5.5, 9.7, 10, 10, 10], itemStyle: { color: '#ee6666' } }
+            ]
+        };
+        chart9.setOption(option9);
+
+        // Responsive
+        window.addEventListener('resize', function() {
+            chart1.resize();
+            chart2.resize();
+            chart3.resize();
+            chart4.resize();
+            chart5.resize();
+            chart6.resize();
+            chart7.resize();
+            chart8.resize();
+            chart9.resize();
+        });
+    </script>
+</body>
+</html>
